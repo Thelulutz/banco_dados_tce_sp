@@ -66,7 +66,11 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'projeto.pipelines.DespesasPipeline': 300,
+   'projeto.pipelines.TempoPipeline': 200,
+   'projeto.pipelines.GastoPipeline': 350,
+   'projeto.pipelines.FornecedorPipeline': 500,
+   'projeto.pipelines.OrgaoPipeline': 650,
+   'projeto.pipelines.LocalPipeline': 800,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
