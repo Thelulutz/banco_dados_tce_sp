@@ -71,6 +71,7 @@ ITEM_PIPELINES = {
    'projeto.pipelines.FornecedorPipeline': 500,
    'projeto.pipelines.OrgaoPipeline': 650,
    'projeto.pipelines.LocalPipeline': 800,
+   'projeto.pipelines.ReceitaPipeline': 950,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
