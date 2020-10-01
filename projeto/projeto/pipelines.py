@@ -26,7 +26,9 @@ class TempoPipeline(object):
     def process_item(self, item, spider):
         try:
             self.cur.execute("""insert into dim_tempo(dt_data, ano, nr_semestre, nr_trimestre, nr_mes, nm_mes, nr_dia, nm_dia, evento_especial) 
-                                values(%s,%s,%s,%s,%s,%s,%s,%s,%s);""",
+                                values(%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                                on conflict (dt_data)
+                                do nothing;""",
                              (item['Data'],
                               item['Ano'],
                               item['Nr_Semestre'],
@@ -86,8 +88,10 @@ class FornecedorPipeline(object):
     def process_item(self, item, spider):
         try:
             self.connection.commit()
-            self.cur.execute("""insert into dim_tempo(cod_fornecedor, nm_fornecedor, nr_cnpj) 
-                                values(%s,%s,%s);""",
+            self.cur.execute("""insert into dim_fornecedor(cod_fornecedor, nm_fornecedor, nr_cnpj) 
+                                values(%s,%s,%s)
+                                on conflict (nm_fornecedor)
+                                do nothing ;""",
                              (item['Cd_Fornecedor'],
                               item['Nm_Fornecedor'],
                               item['Nr_CNPJ']
@@ -113,8 +117,10 @@ class OrgaoPipeline(object):
 
     def process_item(self, item, spider):
         try:
-            self.cur.execute("""insert into dim_tempo(nm_orgao) 
-                                values(%s);""",
+            self.cur.execute("""insert into dim_orgao_publico(nm_orgao) 
+                                values(%s) 
+                                on conflict (nm_orgao)
+                                do nothing ;""",
                              (item['Nm_Orgao']
                               ))
             self.connection.commit()
@@ -139,10 +145,38 @@ class LocalPipeline(object):
 
     def process_item(self, item, spider):
         try:
-            self.cur.execute("""insert into dim_tempo(nm_municipio, sg_estado) 
-                                values(%s,%s);""",
+            self.cur.execute("""insert into dim_local(nm_municipio, sg_estado) 
+                                values(%s,%s) 
+                                on conflict (nm_municipio) 
+                                do nothing ;""",
                              (item['Nm_Municipio'],
                               item['Sg_Estado']
+                              ))
+            self.connection.commit()
+            return item
+        except:
+            pass
+
+
+class ReceitaPipeline(object):
+
+    def open_spider(self, spider):
+        hostname = 'localhost'
+        username = 'postgres'
+        password = 'TCEfiap'  # your password
+        database = 'projeto'
+        self.connection = psycopg2.connect(host=hostname, user=username, password=password, dbname=database)
+        self.cur = self.connection.cursor()
+
+    def close_spider(self, spider):
+        self.cur.close()
+        self.connection.close()
+
+    def process_item(self, item, spider):
+        try:
+            self.cur.execute("""insert into dim_receita(ft_receita, vl_receita) values(%s,%s);""",
+                             (item['Ft_Receita'],
+                              item['Vl_Receita']
                               ))
             self.connection.commit()
             return item
