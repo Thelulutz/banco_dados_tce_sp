@@ -38,3 +38,8 @@ class DimOrgaoPublicoItem(scrapy.Item):
 class DimLocalItem(scrapy.Item):
     Nm_Municipio = scrapy.Field()
     Sg_Estado = scrapy.Field()
+
+
+class DimReceitaItem(scrapy.Item):
+    Ft_Receita = scrapy.Field()
+    Vl_Receita = scrapy.Field()
