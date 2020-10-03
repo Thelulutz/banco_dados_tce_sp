@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-# Scrapy settings for tce_despesas project
+# Scrapy settings for projeto project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -16,7 +14,7 @@ NEWSPIDER_MODULE = 'projeto.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'tce_despesas (+http://www.yourdomain.com)'
+#USER_AGENT = 'projeto (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -47,7 +45,7 @@ DOWNLOAD_DELAY = 1
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'projeto.middlewares.TceDespesasSpiderMiddleware': 543,
+#    'projeto.middlewares.ProjetoSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
