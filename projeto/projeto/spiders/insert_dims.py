@@ -12,6 +12,43 @@ import psycopg2
 import holidays
 
 
+class DimTempoItem(scrapy.Item):
+    Data = scrapy.Field()
+    Ano = scrapy.Field()
+    Nr_Semestre = scrapy.Field()
+    Nr_Trimestre = scrapy.Field()
+    Nr_Mes = scrapy.Field()
+    Nm_Mes = scrapy.Field()
+    Nr_Dia = scrapy.Field()
+    Nm_Dia = scrapy.Field()
+    Ev_Especial = scrapy.Field()
+
+
+class DimGastoItem(scrapy.Item):
+    Nr_Empenho = scrapy.Field()
+    Vl_Gasto = scrapy.Field()
+
+
+class DimFornecedorItem(scrapy.Item):
+    Cd_Fornecedor = scrapy.Field()
+    Nm_Fornecedor = scrapy.Field()
+    Nr_CNPJ = scrapy.Field()
+
+
+class DimOrgaoPublicoItem(scrapy.Item):
+    Nm_Orgao = scrapy.Field()
+
+
+class DimLocalItem(scrapy.Item):
+    Nm_Municipio = scrapy.Field()
+    Sg_Estado = scrapy.Field()
+
+
+class DimReceitaItem(scrapy.Item):
+    Ft_Receita = scrapy.Field()
+    Vl_Receita = scrapy.Field()
+
+
 class TempoSpider(scrapy.Spider):
     name = 'tempo'
     allowed_domains = ['*']
