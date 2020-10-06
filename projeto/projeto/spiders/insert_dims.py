@@ -2,16 +2,16 @@ import scrapy
 from scrapy import Request
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
-from projeto.items import DimTempoItem, DimGastoItem, DimFornecedorItem, DimOrgaoPublicoItem, DimLocalItem, DimReceitaItem
 import re
 import json
 import unicodedata
 from datetime import datetime
 import pandas as pd
-import psycopg2
 import holidays
 
 
+# Classe Item do scrapy para inserir dados na tabela dim_tempo
+# Field são os campos os quais serão inseridos por esse código
 class DimTempoItem(scrapy.Item):
     Data = scrapy.Field()
     Ano = scrapy.Field()
@@ -24,26 +24,36 @@ class DimTempoItem(scrapy.Item):
     Ev_Especial = scrapy.Field()
 
 
+# Classe Item do scrapy para inserir dados na tabela dim_gasto
+# Field são os campos os quais serão inseridos por esse código
 class DimGastoItem(scrapy.Item):
     Nr_Empenho = scrapy.Field()
     Vl_Gasto = scrapy.Field()
 
 
+# Classe Item do scrapy para inserir dados na tabela dim_fornecedor
+# Field são os campos os quais serão inseridos por esse código
 class DimFornecedorItem(scrapy.Item):
     Cd_Fornecedor = scrapy.Field()
     Nm_Fornecedor = scrapy.Field()
     Nr_CNPJ = scrapy.Field()
 
 
+# Classe Item do scrapy para inserir dados na tabela dim_orgao_publico
+# Field são os campos os quais serão inseridos por esse código
 class DimOrgaoPublicoItem(scrapy.Item):
     Nm_Orgao = scrapy.Field()
 
 
+# Classe Item do scrapy para inserir dados na tabela dim_local
+# Field são os campos os quais serão inseridos por esse código
 class DimLocalItem(scrapy.Item):
     Nm_Municipio = scrapy.Field()
     Sg_Estado = scrapy.Field()
 
 
+# Classe Item do scrapy para inserir dados na tabela dim_receita
+# Field são os campos os quais serão inseridos por esse código
 class DimReceitaItem(scrapy.Item):
     Ft_Receita = scrapy.Field()
     Vl_Receita = scrapy.Field()
