@@ -27,7 +27,7 @@ class TempoPipeline(object):
         try:
             self.cur.execute("""insert into dim_tempo(dt_data, ano, nr_semestre, nr_trimestre, nr_mes, nm_mes, nr_dia, nm_dia, evento_especial) 
                                 values({},{},{},{},{},{},{},{},{})
-                                on conflict (dt_data)
+                                on conflict dim_tempo_dt_data_key
                                 do nothing;""".format(
                                 item['Data'],
                                 item['Ano'],
@@ -90,7 +90,7 @@ class FornecedorPipeline(object):
             self.connection.commit()
             self.cur.execute("""insert into dim_fornecedor(cod_fornecedor, nm_fornecedor, nr_cnpj) 
                                 values({},{},{})
-                                on conflict (nm_fornecedor)
+                                on conflict dim_fornecedor_nm_fornecedor_key
                                 do nothing ;""".format(
                                 item['Cd_Fornecedor'],
                                 item['Nm_Fornecedor'],
@@ -119,7 +119,7 @@ class OrgaoPipeline(object):
         try:
             self.cur.execute("""insert into dim_orgao_publico(nm_orgao) 
                                 values({}) 
-                                on conflict (nm_orgao)
+                                on conflict dim_orgao_publico_nm_orgao_key
                                 do nothing ;""".format(item['Nm_Orgao']))
             self.connection.commit()
             return item
@@ -145,7 +145,7 @@ class LocalPipeline(object):
         try:
             self.cur.execute("""insert into dim_local(nm_municipio, sg_estado) 
                                 values({},{}) 
-                                on conflict (nm_municipio) 
+                                on conflict dim_local_nm_municipio_key 
                                 do nothing ;""".format(
                                 item['Nm_Municipio'],
                                 item['Sg_Estado']
